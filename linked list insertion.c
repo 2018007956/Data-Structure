@@ -25,26 +25,33 @@ void insert_node(node** head, int val, int position)
 	}
 	if ( position == 1 ) {
 		//inserting node at the beginning of the list
-		tmp_node->next = *head;
+		tmp_node->next = *head; 
+		    //Update next pointer of the new node (node to be inserted) to point to the current node
 		*head = tmp_node;
+		    //update new node as head node
 		return;
 	}
+	if ( count + 1 == position && curr->next == NULL ) { 
+		// Inserting node at the end of the list  (The next pointer of the new node to be NULL)
+		curr->next = tmp_node;
+		    //Last node of the existing node is linked with the new node
+		    //i.e. , the last node's(existing) next pointer points to the new node
+		return;
+	}
+
+	// Inserting node in the list at given position
 	while ( curr&&count < position - 1 ) {
-		curr = curr->next;
+		curr = curr->next;//Move the current pointer upto the position where node to be inserted
 		count++;
 	}
 	if ( position > (count + 1) ) {
 		printf("\n position doesn't exists in the list ");
 		return;
 	}
-	if ( count + 1 == position && curr->next == NULL ) {
-		// Inserting node at the end of the list
-		curr->next = tmp_node;
-		return;
-	}
-	// Inserting node in the list at given position
 	tmp_node->next = curr->next;
+	    //Store current next pointer address to tmp_node next
 	curr->next = tmp_node;
+	    //Store tmp_node address to current next
 }
 void print_list(node* head)
 {
